@@ -15,6 +15,12 @@ keys.addEventListener('click', e => {
     // On récupère l'action associée au bouton (par exemple: add, subtract, etc.)
     const action = key.dataset.action;
 
+    //on crée un objet audio pour jouer le son de la touche
+    const keySong = new Audio('/sounds/key.wav');
+    keySong.currentTime = 0;
+    keySong.play();
+
+
     //on prend le contenu de la div display qui affiche les nombre
     const keyContent = key.textContent;
 
@@ -24,10 +30,11 @@ keys.addEventListener('click', e => {
     //on récupère le type de bouton précédent
     const previousKeyType = calculator.dataset.previousKeyType;
 
-    //pour retirer .is-depressed de tous les boutons
-    Array.from(keys.parentNode.children).forEach(
-        key => key.classList.remove('is-depressed'));
+     //pour retirer .is-depressed de tous les boutons
+    // On parcourt tous les boutons du calculateur et on retire la classe 'is-depressed' à chacun
+    Array.from(keys.children).forEach(key => key.classList.remove('is-depressed'));
 
+    
         const calculer = (n1, operator, n2) => {
             let result = '';
     
@@ -96,8 +103,11 @@ keys.addEventListener('click', e => {
 
        //on fait pareil pour l'opérateur choisi
        calculator.dataset.operator = action;
+
+
     }
-        
+
+
     //si le bouton decimal est cliqué on vérifie si le nombre affiché contient une virgule
     //et si c'est le cas on l'ajoute à la fin
     if (action === 'decimal') {
